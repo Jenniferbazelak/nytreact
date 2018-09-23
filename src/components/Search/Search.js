@@ -3,27 +3,39 @@ import "./Search.css";
 
 const Search = props =>
 
-<div class="row">
-            <div class="col-md-12">
-                <div class="card mt-5">
-                    <div class="card-header"><i class="fas fa-newspaper"></i> Search Parameters</div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
+<div className="row">
+            <div className="col-md-12">
+                <div className="card mt-5">
+                    <div className="card-header"><i className="fas fa-newspaper"></i> Search Parameters</div>
+                    <ul className="list-group list-group-flush">
+                        <li className="list-group-item">
                             <form>
-                                <div class="form-group">
+                                <div className="form-group">
                                     <label for="search-input">Search Term:</label>
-                                    <input type="text" class="form-control" id="search-input" placeholder="Japan"/>
+                                    <input 
+                                     onChange={props.handleInputChange}
+                                     value={props.value}
+                                     name="search"
+                                    type="text" className="form-control" id="search-input" placeholder="Search for an Article"/>
                                 </div>
-                                <div class="form-group">
-                                    <label for="start-year-input">Start Year (Optional):</label>
-                                    <input type="text" class="form-control" id="start-year-input" placeholder="YYYYMMDD"/>
+                                <div className="form-group">
+                                    <label for="start-year-input">Start Date:</label>
+                                    <input 
+                                    onChange={props.handleInputChange}
+                                    value={props.value}
+                                    name="startDate"
+                                    type="text" className="form-control" id="start-date-input" placeholder="YYYYMMDD"/>
                                 </div>
-                                <div class="form-group">
-                                    <label for="end-year-input">End Year (Optional):</label>
-                                    <input type="text" class="form-control" id="end-year-input" placeholder="YYYYMMDD"/>
+                                <div className="form-group">
+                                    <label for="end-date-input">End Date:</label>
+                                    <input 
+                                      onChange={props.handleInputChange}
+                                      value={props.value}
+                                      name="endDate"
+                                    type="text" className="form-control" id="end-date-input" placeholder="YYYYMMDD"/>
                                 </div>
                                 <div>
-                                    <button type="button" class="btn btn-info" id="sButton"><i class="fas fa-search"></i> Search</button>
+                                    <button type="button"  onClick={props.handleFormSubmit} class="btn btn-info" id="sButton"><i className="fas fa-search"></i> Search</button>
                                 </div>
                             </form>
                         </li>
