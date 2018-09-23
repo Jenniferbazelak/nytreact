@@ -1,5 +1,6 @@
 // Require mongoose
 var mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
 // Create article schema
 var ArticleSchema = new Schema({
@@ -27,6 +28,17 @@ var ArticleSchema = new Schema({
     type: Boolean,
     required: true,
     default: false
+  },
+  date: {
+    type: Date,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  id: {
+    type: String,
+    unique: true
   }
 });
 
