@@ -26,7 +26,9 @@ class App extends Component {
       [name]: value
     });
   };
-  
+
+  //handleSaveArticle 
+
   handleFormSubmit = event => {
     event.preventDefault();
     this.searchArticles(this.state.search, this.state.startDate, this.state.endDate);
@@ -39,8 +41,17 @@ class App extends Component {
       <div>
            <Container>
         <Header/>
-        <Search/>
-        <Results/>
+        <Search
+        value={this.state.search}
+        value={this.state.startDate}
+        value={this.state.endDate}
+        handleInputChange={this.handleInputChange}
+        handleFormSubmit={this.handleFormSubmit}/>
+        <Results
+        title={this.state.results.Title}
+        summary={this.state.results.summary}
+       link={this.state.results.link}
+        handleSaveArticle={this.state.handleSaveArticle}/>
         <Saved/>
         </Container>
       </div>
