@@ -1,16 +1,14 @@
 {
-  "name": "nyt",
-  "version": "0.1.0",
-  "private": true,
+  "name": "nytreact",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Jenniferbazelak/nytreact.git",
+  "author": "Baz <jennigoldstein@gmail.com>",
+  "license": "MIT",
   "dependencies": {
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
-    "react-scripts": "1.1.5"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "mongoose": "^5.2.17",
+    "path": "^0.12.7"
   }
 }

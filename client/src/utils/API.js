@@ -4,7 +4,7 @@ const APIKEY = "0f1e5f1eb5e3402dadd720d3519de6bf";
 
 export default {
   search: function(search, startDate, endDate) {
-    return axios.get(BASEURL + search + APIKEY + query + startDate + endDate);
+    return axios.get(BASEURL + search + APIKEY + search + startDate + endDate);
   },
   saveArticle: function(articleInfo) {
     return axios.post("api/saved", articleInfo);
@@ -17,3 +17,4 @@ export default {
   },
   
 };
+

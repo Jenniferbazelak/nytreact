@@ -4,6 +4,7 @@ import Container from "./components/Container";
 import Results from "./components/Results";
 import Saved from "./components/Saved";
 import Search from "./components/Search";
+import API from "./utils/API";
 
 
 class App extends Component {

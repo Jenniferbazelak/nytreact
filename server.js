@@ -1,37 +1,29 @@
 const express = require("express");
-const path = require("path");
-const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-
-// Initialize Express
-const PORT = process.env.PORT || 3000;
+const mongoose = require("mongoose");
+const routes = require("./routes");
 const app = express();
+const PORT = process.env.PORT || 3001;
 
-// Middleware
-app.use(bodyParser.urlencoded({ extended: false }));
+// Define middleware here
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static("public"));
-
-
-//set up database with mongoose
-//DB config
-const dbURI = "mongodb://localhost/nytreact";
-
-if (process.env.MONGODB_URI) {
-    mongoose.connect(process.env.MONGODB_URI);
+// Serve up static assets (usually on heroku)
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
 }
-else {
-    mongoose.connect(dbURI)
-}
+// Add routes, both API and view
+app.use(routes);
 
-// Connect to db
-const db = mongoose.connection;
-db.on('error', function (err) {
-  console.log("-----Mongoose error: -----\n" + err);
+// Connect to the Mongo DB
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/nytreact");
+
+// Start the API server
+app.listen(PORT, function() {
+  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
-db.once('open', function () {
-  console.log("Mongoose connected successfully");
-});
+
+
 
 
 //require routes
@@ -41,7 +33,6 @@ db.once('open', function () {
 // app.use("/saved", );
 
 
-// Listen on port 3000
-app.listen(PORT, function () {
-  console.log("App running on port 3000!");
-});
+
+
+

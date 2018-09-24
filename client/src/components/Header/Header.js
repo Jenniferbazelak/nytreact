@@ -7,7 +7,7 @@ const Header = props =>
 <div class="col-md-12">
     <div class="card">
         <div class="card-body bg-info text-white text-center p-4">
-            <h1><i class="far fa-newspaper"></i> New York Times Seach</h1>
+            <h1><i class="far fa-newspaper"></i> New York Times Search</h1>
         </div>
     </div>
 </div>
