@@ -7,21 +7,17 @@ var ArticleSchema = new Schema({
   // title is a required string
   title: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   },
   // summary is a required string
   summary: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   },
    // link is a required url
    link: {
     type: String,
-    required: true,
-    unique: true
-    
+    required: true
   },
   // boolean to flag articles as saved
   saved: {
@@ -30,7 +26,7 @@ var ArticleSchema = new Schema({
     default: false
   },
   date: {
-    type: Date,
+    type: Date
   },
   createdAt: {
     type: Date,
