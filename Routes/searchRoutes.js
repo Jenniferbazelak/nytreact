@@ -1,14 +1,8 @@
 require('dotenv').config();
 const express = require("express");
 const router = express.Router();
-const axios = require("axios");
 const request = require("request");
 
-// Import models
-// const db = require("../models");
-
-
-// ---------- Search Routes ------------
 
 router.get("/", function(req,res) {
   const { search, startDate, endDate } = req.query;

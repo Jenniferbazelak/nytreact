@@ -15,6 +15,7 @@ router.post("/saved", function(req,res) {
     title: req.body.title,
     summary: req.body.summary,
     link: req.body.link,
+    date: req.body.date,
     id: req.body._id,
     saved: true
   };
