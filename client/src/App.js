@@ -5,7 +5,7 @@ import Results from "./components/Results";
 import Saved from "./components/Saved";
 import Search from "./components/Search";
 import API from "./utils/API";
-
+// import { BrowserRouter as Router, Route } from "react-router-dom";
 
 
 class App extends Component {
@@ -13,7 +13,8 @@ class App extends Component {
     results: [],
     search: "",
     startDate: "",
-    endDate: ""
+    endDate: "",
+    savedArticles: []
   };
 
 
@@ -26,7 +27,7 @@ class App extends Component {
   loadSavedArticles = () => {
     API.getSaved()
       .then(res =>
-        this.setState({ books: res.data, title: "", author: "", synopsis: "" })
+        this.setState({ savedArticles: res.data })
       )
       .catch(err => console.log(err));
   };
@@ -41,15 +42,16 @@ class App extends Component {
 
   handleSaveArticle = id => {
     const articleToSave = this.state.results.find(result => result.id === id)
-   const articleInfo ={
-    title: articleToSave.title,
-    summary: articleToSave.summary,
-    link: articleToSave.link,
-    date: articleToSave.date,
-    id: articleToSave._id,
-    saved: true
+    const articleInfo = {
+      title: articleToSave.title,
+      summary: articleToSave.summary,
+      link: articleToSave.link,
+      date: articleToSave.date,
+      id: articleToSave._id,
+      saved: true
     }
-    API.saveArticle(articleInfo)
+    API.saveArticle(articleInfo);
+    this.loadSavedArticles();
   }
 
   handleDeleteArticle = id => {
@@ -60,7 +62,8 @@ class App extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    this.searchArticles(this.state.search, this.state.startDate, this.state.endDate).then(response => { this.setState({ results : response.data})}). catch(err => console.log(err))
+    this.searchArticles(this.state.search, this.state.startDate, this.state.endDate);
+
   };
 
 
@@ -70,23 +73,25 @@ class App extends Component {
         <Container>
           <Header />
           <Search
-            value={this.state.search}
-            value={this.state.startDate}
-            value={this.state.endDate}
+            search={this.state.search}
+            startDate={this.state.startDate}
+            endDate={this.state.endDate}
             handleInputChange={this.handleInputChange}
             handleFormSubmit={this.handleFormSubmit} />
-          <Results>
-            {this.state.results.map(result => {
-              return (
-                  key={result._id}
-                  title={result.title}
-                  summary={result.summary}
-                  link={result.link}
-                  handleSaveArticle={this.state.handleSaveArticle}
-           
-              );
-            })} </Results>
-          <Saved />
+          <Results
+              results={this.state.results} />
+          
+          <Saved>
+            <div>
+              {this.state.savedArticles.map(article => {
+                return (
+                  <div className="card-body">
+                    <a className="url" href={article.link}><span className="title">{article.title}</span> </a>
+                    <p className="summary">{article.summary}</p><button type="button" onClick={article.handleDeleteArticle} data-id={article.id} className="btn btn-info" id="deleteButton">Delete</button>
+                  </div>)
+              })}
+            </div>
+          </Saved>
         </Container>
       </div>
     );

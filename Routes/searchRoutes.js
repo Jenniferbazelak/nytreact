@@ -4,6 +4,7 @@ const router = express.Router();
 const request = require("request");
 
 
+
 router.get("/", function(req,res) {
   const { search, startDate, endDate } = req.query;
   const apiKey = process.env.NYT_API_KEY;
@@ -11,6 +12,7 @@ router.get("/", function(req,res) {
   let queryUrl = `https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=${apiKey}&q=${search}`;
   if (startDate) queryUrl += `&begin_date=${startDate}`;
   if (endDate) queryUrl += `&end_date=${endDate}`;
+  console.log(queryUrl);
 
   request(queryUrl, function(err,response,body) {
     if (err) {
@@ -18,13 +20,13 @@ router.get("/", function(req,res) {
       return res.json(err);
     };
     const rawJson = JSON.parse(body);
-    const articleData = rawJson.response.docs.map(article => {
+    const articleData = rawJson.response.docs.map(result => {
       return {
-        id: article._id,
-        title: article.headline.main,
-        summary: article.snippet,
-        link: article.web_url,
-        date: article.pub_date || "Not provided",
+        id: result._id,
+        title: result.headline.main,
+        summary: result.snippet,
+        link: result.web_url,
+        date: result.pub_date || "Not provided",
         saved: false
       };
     });

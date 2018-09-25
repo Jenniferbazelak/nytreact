@@ -8,7 +8,7 @@ export default {
     if (startDate) url += `&startDate=${startDate}`;
     if (endDate) url += `&endDate=${endDate}`;
     console.log(url);
-    return axios.get(url);
+    return axios.get("/", url);
   },
   saveArticle: function(articleInfo) {
     return axios.post("/api/saved", articleInfo);

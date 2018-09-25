@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 const db = require("../models");
 
-//get saved article
+//get saved articles
 router.get("/saved", function(req,res) {
-    db.Article.find({})
+    db.Article.find({saved: true})
       .then((data) => res.json(data))
       .catch((err) => res.json(err));
   });

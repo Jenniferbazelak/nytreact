@@ -11,7 +11,7 @@ const Search = props =>
                         <li className="list-group-item">
                             <form>
                                 <div className="form-group">
-                                    <label for="search-input">Search Term:</label>
+                                    <label>Search Term:</label>
                                     <input 
                                      onChange={props.handleInputChange}
                                      value={props.value}
@@ -19,7 +19,7 @@ const Search = props =>
                                     type="text" className="form-control" id="search-input" placeholder="Search for an Article"/>
                                 </div>
                                 <div className="form-group">
-                                    <label for="start-year-input">Start Date:</label>
+                                    <label>Start Date:</label>
                                     <input 
                                     onChange={props.handleInputChange}
                                     value={props.value}
@@ -27,7 +27,7 @@ const Search = props =>
                                     type="text" className="form-control" id="start-date-input" placeholder="YYYYMMDD"/>
                                 </div>
                                 <div className="form-group">
-                                    <label for="end-date-input">End Date:</label>
+                                    <label>End Date:</label>
                                     <input 
                                       onChange={props.handleInputChange}
                                       value={props.value}
@@ -35,7 +35,7 @@ const Search = props =>
                                     type="text" className="form-control" id="end-date-input" placeholder="YYYYMMDD"/>
                                 </div>
                                 <div>
-                                    <button type="button"  onClick={props.handleFormSubmit} class="btn btn-info" id="sButton"><i className="fas fa-search"></i> Search</button>
+                                    <button type="button"  onClick={props.handleFormSubmit} className="btn btn-info" id="sButton"><i className="fas fa-search"></i> Search</button>
                                 </div>
                             </form>
                         </li>
