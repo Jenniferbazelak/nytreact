@@ -12,8 +12,16 @@ app.use(bodyParser.json());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
-// Add routes, both API and view
-app.use(routes);
+// Import routes (API and article search)
+const apiRoutes = require("./routes/apiRoutes.js");
+const searchRoutes = require("./routes/searchRoutes.js");
+app.use("/api", apiRoutes);
+app.use("/search", searchRoutes);
+
+// Handle React routing, return all requests to React app
+app.get('*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
 
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/nytreact");
@@ -26,11 +34,6 @@ app.listen(PORT, function() {
 
 
 
-//require routes
-
-// Routing
-// app.use("/", htmlroutes);
-// app.use("/saved", );
 
 
 
